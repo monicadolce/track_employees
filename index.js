@@ -75,7 +75,7 @@ function init () {
             viewALLEmployess();
             console.log(answers);
         } else if (answers.options === 'Add Employee') {
-
+            addEmployee();
         } else if (answers.options === 'Update Employee Role') {
 
         } else if (answers.options === 'View All Roles') {
@@ -173,13 +173,49 @@ function init () {
         })
     }
 
+    function addEmployee() {
+        inquirer.prompt ([
+            {
+                    type: 'input',
+                    name: 'employee_firstname',
+                    message: "What is the employee's first name?",
+                },
+                {
+                        type: 'input',
+                        name: 'employee_lastname',
+                        message: "What is the employee's last name?",
+                    },
+                    {
+                        type: 'input',
+                        name: 'employee_role',
+                        message: "What is the employee's role?",
+                    },
+                    {
+                        type: 'input',
+                        name: 'employee_manager',
+                        message: "Who is the employee's manager?",
+                    }, 
+    ]
+        ).then ((answers) =>{
+            connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answers.employee_firstname, answers.employee_lastname, answers.employee_role, answers.employee_manager], (err, data) => {
+                if (err) {
+                    console.log(err); 
+                 }
+                 console.table (data)
+                 init();
+            })
+        })
+    }
+
+}
+
     // .then((answers) => {
     //     let newManager = new Manager(answers.name, answers.id, answers.email, answers.number)
     //     employees.push(newManager)
     //     // menu function is called to return to menu prompts
     //     menu()
     // });
-}
+
 // .then((answers) => {
 //     const htmlPageContent = generateHTML(answers);
 
