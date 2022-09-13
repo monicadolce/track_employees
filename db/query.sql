@@ -1,4 +1,3 @@
 SELECT *
 FROM role
-JOIN employee ON employee.role_id = role.id
-JOIN ;
+JOIN employee ON employee.role_id = role.id;
