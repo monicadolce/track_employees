@@ -186,14 +186,14 @@ function init () {
                         message: "What is the employee's last name?",
                     },
                     {
-                        type: 'input',
+                        type: 'number',
                         name: 'employee_role',
-                        message: "What is the employee's role?",
+                        message: "What is the id of the employee's role?",
                     },
                     {
-                        type: 'input',
+                        type: 'number',
                         name: 'employee_manager',
-                        message: "Who is the employee's manager?",
+                        message: "What is the id of the employee's manager?",
                     }, 
     ]
         ).then ((answers) =>{
