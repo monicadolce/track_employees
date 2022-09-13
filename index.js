@@ -2,7 +2,6 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const connection = require('./db/connection')
-const Role = require('./lib/Role');
 
 // Empty array collects answers to prompts
 let employess = [];
@@ -183,23 +182,42 @@ function init() {
             },
         ]
         ).then((answers) => {
-            let newRole = new Role(answers.role_name, answers.salary, answers.department_id)
-            employees.push(newRole)
-            //  function is called to return to menu prompts
-            init();
+            connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.table(data)
+                init();
+            })
         })
-
-        // ).then((answers) => {
-        //     connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
-        //         if (err) {
-        //             console.log(err);
-        //         }
-        //         console.table(data)
-        //         init();
-        //     })
-        // })
     }
 }
+
+//Delete data; Add delete route using prepared statement 
+
+// app.delete('/delete/:id', (req, res) => {
+//     db.query('DELETE FROM course_names WHERE id = ?', 
+//     req.params.id, function (err, results) {
+//       if (err) {
+//         console.log(err);
+//         return res.json((err));
+//       }
+  
+//       return res.json((results));
+//     })
+//   })        
+
+// Query database using COUNT() and GROUP BY
+// db.query('SELECT COUNT(id) AS total_count FROM favorite_books GROUP BY in_stock', function (err, results) {
+//     console.log(results);
+//   });
+
+// Query database using SUM(), MAX(), MIN() AVG() and GROUP BY
+// db.query('SELECT SUM(quantity) AS total_in_section, MAX(quantity) AS max_quantity, MIN(quantity) AS min_quantity, AVG(quantity) AS avg_quantity FROM favorite_books GROUP BY section', function (err, results) {
+//     console.log(results);
+//   });
+
+
 
 
 
