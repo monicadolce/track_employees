@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const connection = require('./db/connection')
+const Role = require('./lib/Role');
 
 // Empty array collects answers to prompts
 let employess = [];
@@ -182,14 +183,21 @@ function init() {
             },
         ]
         ).then((answers) => {
-            connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(data)
-                init();
-            })
+            let newRole = new Role(answers.role_name, answers.salary, answers.department_id)
+            employees.push(newRole)
+            //  function is called to return to menu prompts
+            init();
         })
+
+        // ).then((answers) => {
+        //     connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
+        //         if (err) {
+        //             console.log(err);
+        //         }
+        //         console.table(data)
+        //         init();
+        //     })
+        // })
     }
 }
 
