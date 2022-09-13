@@ -164,25 +164,23 @@ function init() {
     }
 
     function updateEmployeeRole() {
+
+        // viewALLEmployess()
+
         inquirer.prompt([
             {
                 type: 'input',
-                name: 'role_name',
-                message: 'What is the name of the new role?',
+                name: 'employee_id',
+                message: 'What is the id of the employee you want to update?',
             },
             {
                 type: 'input',
-                name: 'salary',
-                message: 'What is the salary of the new role?',
-            },
-            {
-                type: 'input',
-                name: 'department_id',
-                message: "What is the id of the new role's department?",
+                name: 'role_id',
+                message: 'What is the new role you want to assign to the employee?',
             },
         ]
         ).then((answers) => {
-            connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
+            connection.query("UPDATE employee SET role_id = ? WHERE id = ? ", [answers.role_id, answers.employee_id], (err, data) => {
                 if (err) {
                     console.log(err);
                 }
