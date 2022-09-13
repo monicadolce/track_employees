@@ -16,7 +16,7 @@ function init () {
             type: 'list',
             name: 'options',
             message: 'What would you like to do?',
-            choices: ['View All Employess', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department', 'Quit']
+            choices: ['View All Employess', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department']
         },
         // {
         //     type: 'input',
@@ -77,7 +77,7 @@ function init () {
         } else if (answers.options === 'Add Employee') {
             addEmployee();
         } else if (answers.options === 'Update Employee Role') {
-
+            updateEmployeeRole();
         } else if (answers.options === 'View All Roles') {
             viewAllRoles();
 
@@ -91,9 +91,12 @@ function init () {
 
             addDepartment();
 
-        } else if (answers.options === 'Quit') {
-
+            // return;
         }
+
+        // } return; else if (answers.options === 'Quit') {
+
+        // }
     })
 
     function viewALLEmployess() {
@@ -207,7 +210,74 @@ function init () {
         })
     }
 
+    function updateEmployeeRole() {
+        inquirer.prompt ([
+               {
+            type: 'input',
+            name: 'role_name',
+            message: 'What is the name of the new role?',
+        },
+        {
+                type: 'input',
+                name: 'salary',
+                message: 'What is the salary of the new role?',
+            },
+            {
+                    type: 'input',
+                    name: 'department_id',
+                    message: "What is the id of the new role's department?",
+                },
+    ]
+        ).then ((answers) =>{
+            connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answers.role_name, answers.salary, answers.department_id], (err, data) => {
+                if (err) {
+                    console.log(err); 
+                 }
+                 console.table (data)
+                 init();
+            })
+        })
+    }
+
+
+    // function updateEmployeeRole() {
+    //     inquirer.prompt ([
+    //         {
+    //                 type: 'input',
+    //                 name: 'employee_firstname',
+    //                 message: "What is the employee's first name?",
+    //             },
+    //             {
+    //                     type: 'input',
+    //                     name: 'employee_lastname',
+    //                     message: "What is the employee's last name?",
+    //                 },
+    //                 {
+    //                     type: 'number',
+    //                     name: 'employee_role',
+    //                     message: "What is the id of the employee's role?",
+    //                 },
+    //                 {
+    //                     type: 'number',
+    //                     name: 'employee_manager',
+    //                     message: "What is the id of the employee's manager?",
+    //                 }, 
+    // ]
+    //     ).then ((answers) =>{
+    //         connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answers.employee_firstname, answers.employee_lastname, answers.employee_role, answers.employee_manager], (err, data) => {
+    //             if (err) {
+    //                 console.log(err); 
+    //              }
+    //              console.table (data)
+    //              init();
+    //         })
+    //     })
+    // }
+
 }
+
+
+
 
     // .then((answers) => {
     //     let newManager = new Manager(answers.name, answers.id, answers.email, answers.number)
