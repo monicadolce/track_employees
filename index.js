@@ -1,10 +1,7 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const connection = require('./db/connection')
-
-// Empty array collects answers to prompts
-let employess = [];
+const connection = require('./connection')
 
 // Function initializes app using inquirer
 function init() {
@@ -164,9 +161,6 @@ function init() {
     }
 
     function updateEmployeeRole() {
-
-        // viewALLEmployess()
-
         inquirer.prompt([
             {
                 type: 'input',
