@@ -1,5 +1,4 @@
 const mysql = require("mysql2");
-// const connection = require("mysql2/typings/mysql/lib/Connection");
 
 const connection = mysql.createConnection(
     {
