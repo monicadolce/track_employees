@@ -191,50 +191,5 @@ function init() {
     }
 }
 
-//Delete data; Add delete route using prepared statement 
-
-// app.delete('/delete/:id', (req, res) => {
-//     db.query('DELETE FROM course_names WHERE id = ?', 
-//     req.params.id, function (err, results) {
-//       if (err) {
-//         console.log(err);
-//         return res.json((err));
-//       }
-  
-//       return res.json((results));
-//     })
-//   })        
-
-// Query database using COUNT() and GROUP BY
-// db.query('SELECT COUNT(id) AS total_count FROM favorite_books GROUP BY in_stock', function (err, results) {
-//     console.log(results);
-//   });
-
-// Query database using SUM(), MAX(), MIN() AVG() and GROUP BY
-// db.query('SELECT SUM(quantity) AS total_in_section, MAX(quantity) AS max_quantity, MIN(quantity) AS min_quantity, AVG(quantity) AS avg_quantity FROM favorite_books GROUP BY section', function (err, results) {
-//     console.log(results);
-//   });
-
-
-
-
-
-
-// .then((answers) => {
-//     let newManager = new Manager(answers.name, answers.id, answers.email, answers.number)
-//     employees.push(newManager)
-//     // menu function is called to return to menu prompts
-//     menu()
-// });
-
-// .then((answers) => {
-//     const htmlPageContent = generateHTML(answers);
-
-//     fs.writeFile('index.html', htmlPageContent, (err) =>
-//       err ? console.log(err) : console.log('Successfully created index.html!')
-//     );
-//   });
-
-
 // Function call to initialize app
 init();
