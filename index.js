@@ -176,7 +176,7 @@ function init() {
             {
                 type: 'input',
                 name: 'role_id',
-                message: 'What is the new role you want to assign to the employee?',
+                message: 'What is the new id of the role you want to assign to the employee?',
             },
         ]
         ).then((answers) => {
